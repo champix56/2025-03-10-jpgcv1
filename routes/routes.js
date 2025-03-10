@@ -2,7 +2,7 @@ var routes = [
   {
     title: `editor`,
     templateUrl: "/routes/editor/editor.html",
-    template: "<h1>Editeur</h1>",
+    // template: "<h1>Editeur</h1>",
     onLoad: function (params) {
       console.log("editor chargé", params);
     },
@@ -11,7 +11,7 @@ var routes = [
   {
     title: "thumbnail",
     templateUrl: "/routes/thumbnail/thumbnail.html",
-    template: "<h1>Thumbnail</h1>",
+    // template: "<h1>Thumbnail</h1>",
     path: "/thumbnail",
   },
   {
@@ -23,7 +23,7 @@ var routes = [
   {
     title: "home",
     templateUrl: "/routes/home/home.html",
-    template: "<h1>Home</h1>",
+    // template: "<h1>Home</h1>",
     path: "/",
     default: true,
   },
@@ -32,7 +32,7 @@ var errorsRoutes = {
   404: {
     title: "404 NOT FOUND",
     templateUrl: "/routes/errors/404.html",
-    template:'<h1>404</h1>',
+    // template:'<h1>404</h1>',
   },
   500: {
     title: "500 Internal server error",
