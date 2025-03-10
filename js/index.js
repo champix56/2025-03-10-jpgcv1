@@ -4,5 +4,5 @@ document.addEventListener("DOMContentLoaded", function (evt) {
   //   notLoadedTag.innerHTML = "JS <br/>Loaded";
   //   notLoadedTag.style.backgroundColor = "green";
   notLoadedTag.remove();
-  routeAnalyze();
+  router.routeAnalyze();
 });
