@@ -1,0 +1,30 @@
+body{
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+}
+#header{
+    font-size: 24pt;
+    font-weight: 900;
+    text-shadow: 10px 10px 20px grey;
+    color: skyblue;
+    text-decoration: underline grey;
+}
+#header-dot{
+    color :black; 
+}
+#header-js{
+    font-style: italic;
+    color: tomato;
+}
+#wrapper{
+    flex-grow: 1;
+    overflow-y: auto;
+}
+#footer{
+    text-align: center;
+    position: fixed;
+    left:0;
+    right: 0;
+    bottom: 5px;
+}
