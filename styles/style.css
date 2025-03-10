@@ -3,6 +3,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+#js-not-loaded{
+    font-size: xx-large;
+    color: white;
+    text-align: center;
+    background-color: tomato;
+}
 #header {
   font-size: 24pt;
   font-weight: 900;
