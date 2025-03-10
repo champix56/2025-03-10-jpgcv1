@@ -28,17 +28,7 @@ class Router {
     if (undefined !== route.template) {
       loadRouteContentOnWrapper(route);
     } else {
-      //   var xhr = new XMLHttpRequest();
-      //   xhr.open("GET", route.templateUrl);
-      //   xhr.onreadystatechange =  (evt)=> {
-      //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      //       route.template = xhr.response;
-      //       this.#loadRouteContentOnWrapper(route);
-      //     } else return;
-      //   };
-      //   xhr.send();
       const f = fetch(route.templateUrl).then((r) => r.text());
-
       const timeout = new Promise((resolved) => {
         setTimeout(() => resolved(errorsRoutes[500]), 10000);
       });
