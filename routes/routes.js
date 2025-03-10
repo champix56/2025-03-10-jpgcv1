@@ -1,4 +1,4 @@
-var routes = [
+const routes = Object.freeze([
   {
     title: `editor`,
     templateUrl: "/routes/editor/editor.html",
@@ -27,8 +27,8 @@ var routes = [
     path: "/",
     default: true,
   },
-];
-var errorsRoutes = {
+]);
+const errorsRoutes = Object.freeze({
   404: {
     title: "404 NOT FOUND",
     templateUrl: "/routes/errors/404.html",
@@ -39,4 +39,4 @@ var errorsRoutes = {
     template:
       "<h1>La page ne peut etre rendu</h1><h2>Erreur 500 : internal server error</h2>",
   },
-};
+});
