@@ -1,8 +1,19 @@
+/**
+ * Class de routeur modulaire
+ * necessite un objet de configuration des routes et un objet de config de routes d'erreurs 
+ */
 class Router {
   #wrapperId;
+  /**
+   * constructeur de l'instance router
+   * @param {string} wrapperId id du wrapper tag dans le dom
+   */
   constructor(wrapperId) {
     this.#wrapperId = wrapperId;
   }
+  /**
+   * analyseur de route(url) pour chargement dynamique a appeler lors des- changement de route forcé (pushstate)
+   */
   routeAnalyze() {
     var path = location.pathname;
     console.log(path);
@@ -22,6 +33,10 @@ class Router {
     if (currentRoute !== undefined) this.#loadRoute(currentRoute);
     else this.#loadRoute(errorsRoutes[404]);
   }
+  /**
+   * charge le contenu de route depuis le reseau si pas deja caché
+   * @param {Route} route instance de route a mettre en oeuvre 
+   */
   #loadRoute(route) {
     var vm = this;
     console.log(route);
@@ -44,6 +59,10 @@ class Router {
       });
     }
   }
+  /**
+   * chargement dans le wrapper du contenu de template et execution de la fonction onLoad si présente
+   * @param {Route} route route avec contenu préalablement chargé
+   */
   #loadRouteContentOnWrapper(route) {
     var wrapper = document.querySelector("#" + this.#wrapperId);
     wrapper.innerHTML = route.template;
@@ -51,11 +70,18 @@ class Router {
       route.onLoad(route.params);
     }
   }
-  navigate(route) {
-    if (undefined === route || route.length === 0) route = "/";
-    if (route[0] !== "/") route = "/" + route;
-    history.pushState(undefined, undefined, route);
+  /**
+   * navigation vers un liens
+   * @param {string} path chemin de la vue  
+   */
+  navigate(path) {
+    if (undefined === path || path.length === 0) path = "/";
+    if (path[0] !== "/") path = "/" + path;
+    history.pushState(undefined, undefined, path);
     this.routeAnalyze();
   }
 }
+/**
+ * instance du routeur
+ */
 var router = new Router("wrapper");
