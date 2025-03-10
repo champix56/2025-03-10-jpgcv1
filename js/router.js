@@ -30,13 +30,15 @@ class Router {
     } else {
       const f = fetch(route.templateUrl).then((r) => r.text());
       const timeout = new Promise((resolved) => {
-        setTimeout(() => resolved(errorsRoutes[500]), 10000);
+        setTimeout(() => resolved(errorsRoutes[500]), 1000);
       });
       Promise.race([f, timeout]).then((r) => {
-        if (r[1] !== undefined) {
-          this.#loadRouteContentOnWrapper(r[1]);
+        if (typeof r === "object") {
+          //retour obejet de route d'erreur
+          this.#loadRouteContentOnWrapper(r);
         } else {
-          route.template = t;
+          //retour du fetch de vue chargement du tempate dans la route pour cache
+          route.template = r;
           this.#loadRouteContentOnWrapper(route);
         }
       });
@@ -53,7 +55,7 @@ class Router {
     if (undefined === route || route.length === 0) route = "/";
     if (route[0] !== "/") route = "/" + route;
     history.pushState(undefined, undefined, route);
-    routeAnalyze();
+    this.routeAnalyze();
   }
 }
 var router = new Router("wrapper");
