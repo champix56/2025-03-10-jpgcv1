@@ -44,28 +44,173 @@
       </nav>
     </div>
     <div id="wrapper">
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 686 386"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <!-- image -->
-         <image xlink:href="https://i.ytimg.com/vi/qVLMoZd8wbU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDsqk71BFAtidvsYrWPLmMEx5EedA" x="0" y="0"/>
-        <!-- text -->
-        <text
-          x="0"
-          y="100"
-          style="font-weight: 900; text-decoration: underline; fill: tomato"
-          stroke="skyblue"
-          font-size="48"
-          font-style="italic"
+      <div id="editor">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 686 386"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
         >
-          Le js c'est un jeu d'enfant
-        </text>
-      </svg>
+          <!-- image -->
+          <image
+            xlink:href="https://i.ytimg.com/vi/qVLMoZd8wbU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDsqk71BFAtidvsYrWPLmMEx5EedA"
+            x="0"
+            y="0"
+          />
+          <!-- text -->
+          <text
+            x="0"
+            y="100"
+            style="font-weight: 900; text-decoration: underline; fill: tomato"
+            stroke="skyblue"
+            font-size="48"
+            font-style="italic"
+          >
+            Le js c'est un jeu d'enfant
+          </text>
+        </svg>
+        <div class="col-dt">
+          <style>
+            .smallNumber {
+              width: 50px;
+            }
+            #editor {
+              text-align: center;
+            }
+            label h2 {
+              display: inline;
+            }
+            .cols{
+                display: flex;
+                justify-content: center;
+            }
+            .cols{
+                flex:1;
+            }
+          </style>
+          <form>
+            <label for="titre">
+              <h1>Titre</h1> </label
+            ><br /><input name="titre" id="titre" value="js is easy" />
+            <hr />
+            <label for="image">
+              <h2>Image</h2> </label
+            ><br /><select name="image" id="image">
+              <option value="1">futurama1.jpg</option>
+              <option value="2">futurama2.png</option>
+              <option value="3">futurama3.png</option>
+              <option value="4">gwenadu.jpg</option>
+            </select>
+            <hr />
+            <label for="text">
+              <h2>texte</h2> </label
+            ><br /><input
+              name="text"
+              id="text"
+              type="text"
+              value="Le js m'a tué"
+            /><br />
+            <div class="cols">
+              <div>
+                <label for="x">
+                  <h2>x :</h2> </label
+                ><input
+                  class="smallNumber"
+                  name="x"
+                  id="x"
+                  type="number"
+                  value="121"
+                />
+              </div>
+              <div>
+                <label for="y">
+                  <h2>y :</h2> </label
+                ><input
+                  class="smallNumber"
+                  name="y"
+                  id="y"
+                  type="number"
+                  value="65"
+                />
+              </div>
+            </div>
+            <hr />
+            <br />
+            <h2>Decorations</h2>
+            <label for="color">
+              <h2>color :</h2> </label
+            ><input
+              name="color"
+              id="color"
+              type="color"
+              value="#FFFFFF"
+            /><br /><label for="fontSize">
+              <h2>font-size :</h2> </label
+            ><input
+              class="smallNumber"
+              name="fontSize"
+              id="fontSize"
+              type="number"
+              min="0"
+              value="73"
+            />px<br /><label for="fontWeight">
+              <h2>font-weight :</h2> </label
+            ><input
+              class="smallNumber"
+              name="fontWeight"
+              id="fontWeight"
+              type="number"
+              min="100"
+              step="100"
+              max="900"
+              value="900"
+            /><br /><input
+              name="underine"
+              id="underline"
+              type="checkbox"
+            />&nbsp;<label for="underline">
+              <h2>underline</h2> </label
+            >&nbsp;
+            <br/>
+            <input name="italic" id="italic" type="checkbox" />&nbsp;<label for="italic">
+              <h2>italic</h2> </label
+            >
+            <hr />
+            <br />
+            <div class="cols">
+              <div>
+                <label for="frameSizeX">
+                  <h2>frame size X :</h2> </label
+                ><input
+                  class="smallNumber"
+                  name="frameSizeX"
+                  id="frameSizeX"
+                  type="number"
+                  min="0"
+                  value="0"
+                />px
+              </div>
+              <div>
+                <label for="frameSizeY">
+                  <h2>frame size y :</h2> </label
+                ><input
+                  class="smallNumber"
+                  name="frameSizeY"
+                  id="frameSizeY"
+                  type="number"
+                  min="0"
+                  value="0"
+                />px<br />
+              </div>
+            </div>
+
+            <button type="reset" class="btn btn-warning">reset</button>
+            <button type="submit" class="btn btn-primary">save</button>
+          </form>
+        </div>
+      </div>
     </div>
     <div id="footer">Copyright &copy; 2025</div>
   </body>
