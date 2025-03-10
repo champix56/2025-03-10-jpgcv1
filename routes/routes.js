@@ -5,7 +5,7 @@ var routes = [
     onLoad: function (params) {
         console.log('editor chargé',params)
     },
-    path: /^\/editor(\/((?<id>)\d*))?$/,
+    path: /^\/editor(\/(?<id>\d*))?$/,
   },
   {
     title: "thumbnail",
