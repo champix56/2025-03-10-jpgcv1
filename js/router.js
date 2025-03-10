@@ -15,10 +15,10 @@ class Router {
    * analyseur de route(url) pour chargement dynamique a appeler lors des- changement de route forcé (pushstate)
    */
   routeAnalyze() {
-    var path = location.pathname;
+    const path = location.pathname;
     console.log(path);
-    var m = undefined;
-    var currentRoute = routes.find((route) => {
+    let m = undefined;
+    const currentRoute = routes.find((route) => {
       if (
         route.path instanceof RegExp &&
         (m = route.path.exec(path)) !== null
@@ -38,7 +38,6 @@ class Router {
    * @param {Route} route instance de route a mettre en oeuvre 
    */
   #loadRoute(route) {
-    var vm = this;
     console.log(route);
     if (undefined !== route.template) {
       loadRouteContentOnWrapper(route);
@@ -64,7 +63,7 @@ class Router {
    * @param {Route} route route avec contenu préalablement chargé
    */
   #loadRouteContentOnWrapper(route) {
-    var wrapper = document.querySelector("#" + this.#wrapperId);
+    const wrapper = document.querySelector("#" + this.#wrapperId);
     wrapper.innerHTML = route.template;
     if (undefined !== route.onLoad && route.onLoad instanceof Function) {
       route.onLoad(route.params);
@@ -84,4 +83,4 @@ class Router {
 /**
  * instance du routeur
  */
-var router = new Router("wrapper");
+const router = new Router("wrapper");
