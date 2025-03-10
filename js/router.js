@@ -84,3 +84,4 @@ class Router {
  * instance du routeur
  */
 const router = new Router("wrapper");
+export default router;
