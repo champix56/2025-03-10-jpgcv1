@@ -3,19 +3,16 @@ function Router() {
     var path = location.pathname;
     console.log(path);
     var wrapper = document.getElementById("wrapper");
-    switch (path) {
-      case "/editor":
-        wrapper.innerHTML = "<h1>Bienvenue sur l'éditeur de meme'</h1>";
-        break;
-      case "/thumbnail":
-        wrapper.innerHTML =
-          "<h1>Bienvenue sur la gallery des memes enregistrés</h1>";
-        break;
-      case "/":
-      default:
-        wrapper.innerHTML =
-          "<h1>Bienvenue sur le site de generation de memes en svg avec js</h1>";
-        break;
+
+    if ((m = /^\/editor(\/((?<id>)\d*))?$/.exec(path) !== null)) {
+      console.log(m.groups);
+      wrapper.innerHTML = "<h1>Bienvenue sur l'éditeur de meme'</h1>";
+    } else if (path === "/thumbnail") {
+      wrapper.innerHTML =
+        "<h1>Bienvenue sur la gallery des memes enregistrés</h1>";
+    } else {
+      wrapper.innerHTML =
+        "<h1>Bienvenue sur le site de generation de memes en svg avec js</h1>";
     }
   }
   function navigate(route) {
