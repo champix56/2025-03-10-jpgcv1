@@ -7,7 +7,7 @@ class Router {
     var path = location.pathname;
     console.log(path);
     var m = undefined;
-    var currentRoute = routes.find(function (route) {
+    var currentRoute = routes.find((route)=> {
       if (
         route.path instanceof RegExp &&
         (m = route.path.exec(path)) !== null
@@ -30,10 +30,10 @@ class Router {
     } else {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", route.templateUrl);
-      xhr.onreadystatechange = function (evt) {
+      xhr.onreadystatechange =  (evt)=> {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
           route.template = xhr.response;
-          vm.#loadRouteContentOnWrapper(route);
+          this.#loadRouteContentOnWrapper(route);
         } else return;
       };
       xhr.send();
