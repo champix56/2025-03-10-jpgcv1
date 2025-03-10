@@ -1,5 +1,9 @@
-function Router(wrapperId) {
-  function routeAnalyze() {
+class Router {
+    #wrapperId;
+    constructor(wrapperId){
+        this.#wrapperId=wrapperId;
+    }
+   routeAnalyze() {
     var path = location.pathname;
     console.log(path);
     var m = undefined;
@@ -15,10 +19,11 @@ function Router(wrapperId) {
       return false;
     });
     if (m !== null) currentRoute.params = m.groups;
-    if (currentRoute !== undefined) loadRoute(currentRoute);
-    else loadRoute(errorsRoutes[404]);
+    if (currentRoute !== undefined) this.#loadRoute(currentRoute);
+    else this.#loadRoute(errorsRoutes[404]);
   }
-  function loadRoute(route) {
+   #loadRoute(route) {
+    var vm=this;
     console.log(route);
     if (undefined !== route.template) {
       loadRouteContentOnWrapper(route);
@@ -28,28 +33,25 @@ function Router(wrapperId) {
       xhr.onreadystatechange = function (evt) {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
           route.template = xhr.response;
-          loadRouteContentOnWrapper(route);
+          vm.#loadRouteContentOnWrapper(route);
         } else return;
       };
       xhr.send();
     }
   }
-  function loadRouteContentOnWrapper(route) {
-    var wrapper = document.querySelector("#" + wrapperId);
+  #loadRouteContentOnWrapper(route) {
+    var wrapper = document.querySelector("#" + this.#wrapperId);
     wrapper.innerHTML = route.template;
     if (undefined !== route.onLoad && route.onLoad instanceof Function) {
       route.onLoad(route.params);
     }
   }
-  function navigate(route) {
+  navigate(route) {
     if (undefined === route || route.length === 0) route = "/";
     if (route[0] !== "/") route = "/" + route;
     history.pushState(undefined, undefined, route);
     routeAnalyze();
   }
 
-  //   exposition public des fonctions
-  this.routeAnalyze = routeAnalyze;
-  this.navigate = navigate;
 }
 var router = new Router("wrapper");
