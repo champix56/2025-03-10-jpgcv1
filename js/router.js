@@ -2,7 +2,6 @@ function Router(wrapperId) {
   function routeAnalyze() {
     var path = location.pathname;
     console.log(path);
-    var wrapper = document.getElementById("wrapper");
     var m = undefined;
     var currentRoute = routes.find(function (route) {
       if (
@@ -21,6 +20,21 @@ function Router(wrapperId) {
   }
   function loadRoute(route) {
     console.log(route);
+    if (undefined !== route.template) {
+      loadRouteContentOnWrapper(route);
+    } else {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", route.templateUrl);
+      xhr.onreadystatechange = function (evt) {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          route.template = xhr.response;
+          loadRouteContentOnWrapper(route);
+        } else return;
+      };
+      xhr.send();
+    }
+  }
+  function loadRouteContentOnWrapper(route) {
     var wrapper = document.querySelector("#" + wrapperId);
     wrapper.innerHTML = route.template;
     if (undefined !== route.onLoad && route.onLoad instanceof Function) {
