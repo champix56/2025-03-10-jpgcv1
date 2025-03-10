@@ -17,8 +17,9 @@ const routes = Object.freeze([
   {
     title: "Credits",
     template:
-      "<h1>remerciements :</h1><ul><li>Formateur : Alexandre DESORBAIX</li><li>Tous les participants de la formation</li></ul>",
+      "<script src='/routes/editor/editor.js'></script><h1>remerciements :</h1><ul><li>Formateur : Alexandre DESORBAIX</li><li>Tous les participants de la formation</li></ul>",
     path: "/credits",
+    onLoad:()=>{loadScript();}
   },
   {
     title: "home",
@@ -40,3 +41,15 @@ const errorsRoutes = Object.freeze({
       "<h1>La page ne peut etre rendu</h1><h2>Erreur 500 : internal server error</h2>",
   },
 });
+const loadScript=(wrapperId="wrapper")=> {
+    const s = document.querySelectorAll("#" + wrapperId + " script");
+    console.log(s);
+    s.forEach((sc) => {
+      fetch(sc.src)
+        .then((r) => r.text())
+        .then((script) => {
+          eval(script);
+          console.log(script,Editor);
+        });
+    });
+  }
