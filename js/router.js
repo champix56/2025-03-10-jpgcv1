@@ -37,12 +37,19 @@ class Router {
       //     } else return;
       //   };
       //   xhr.send();
-      fetch(route.templateUrl)
-        .then((r) => r.text())
-        .then((t) => {
+      const f = fetch(route.templateUrl).then((r) => r.text());
+
+      const timeout = new Promise((resolved) => {
+        setTimeout(() => resolved(errorsRoutes[500]), 10000);
+      });
+      Promise.race([f, timeout]).then((r) => {
+        if (r[1] !== undefined) {
+          this.#loadRouteContentOnWrapper(r[1]);
+        } else {
           route.template = t;
           this.#loadRouteContentOnWrapper(route);
-        });
+        }
+      });
     }
   }
   #loadRouteContentOnWrapper(route) {
