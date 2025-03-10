@@ -1,6 +1,6 @@
 /**
  * Class de routeur modulaire
- * necessite un objet de configuration des routes et un objet de config de routes d'erreurs 
+ * necessite un objet de configuration des routes et un objet de config de routes d'erreurs
  */
 class Router {
   #wrapperId;
@@ -35,12 +35,12 @@ class Router {
   }
   /**
    * charge le contenu de route depuis le reseau si pas deja caché
-   * @param {Route} route instance de route a mettre en oeuvre 
+   * @param {Route} route instance de route a mettre en oeuvre
    */
   #loadRoute(route) {
     console.log(route);
     if (undefined !== route.template) {
-      loadRouteContentOnWrapper(route);
+      this.#loadRouteContentOnWrapper(route);
     } else {
       const f = fetch(route.templateUrl).then((r) => r.text());
       const timeout = new Promise((resolved) => {
@@ -71,7 +71,7 @@ class Router {
   }
   /**
    * navigation vers un liens
-   * @param {string} path chemin de la vue  
+   * @param {string} path chemin de la vue
    */
   navigate(path) {
     if (undefined === path || path.length === 0) path = "/";
@@ -85,3 +85,4 @@ class Router {
  */
 const router = new Router("wrapper");
 export default router;
+window.router = router;
