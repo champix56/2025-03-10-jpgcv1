@@ -1,13 +1,13 @@
 class Router {
-    #wrapperId;
-    constructor(wrapperId){
-        this.#wrapperId=wrapperId;
-    }
-   routeAnalyze() {
+  #wrapperId;
+  constructor(wrapperId) {
+    this.#wrapperId = wrapperId;
+  }
+  routeAnalyze() {
     var path = location.pathname;
     console.log(path);
     var m = undefined;
-    var currentRoute = routes.find((route)=> {
+    var currentRoute = routes.find((route) => {
       if (
         route.path instanceof RegExp &&
         (m = route.path.exec(path)) !== null
@@ -22,21 +22,27 @@ class Router {
     if (currentRoute !== undefined) this.#loadRoute(currentRoute);
     else this.#loadRoute(errorsRoutes[404]);
   }
-   #loadRoute(route) {
-    var vm=this;
+  #loadRoute(route) {
+    var vm = this;
     console.log(route);
     if (undefined !== route.template) {
       loadRouteContentOnWrapper(route);
     } else {
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", route.templateUrl);
-      xhr.onreadystatechange =  (evt)=> {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          route.template = xhr.response;
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open("GET", route.templateUrl);
+      //   xhr.onreadystatechange =  (evt)=> {
+      //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      //       route.template = xhr.response;
+      //       this.#loadRouteContentOnWrapper(route);
+      //     } else return;
+      //   };
+      //   xhr.send();
+      fetch(route.templateUrl)
+        .then((r) => r.text())
+        .then((t) => {
+          route.template = t;
           this.#loadRouteContentOnWrapper(route);
-        } else return;
-      };
-      xhr.send();
+        });
     }
   }
   #loadRouteContentOnWrapper(route) {
@@ -52,6 +58,5 @@ class Router {
     history.pushState(undefined, undefined, route);
     routeAnalyze();
   }
-
 }
 var router = new Router("wrapper");
