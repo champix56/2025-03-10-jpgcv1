@@ -3,7 +3,7 @@
  * @param {[]} routes
  * @param {{}} errorRoutes
  */
-class Router {
+export default class Router {
   #routes;
   #errorRoutes;
   #currentPath = "/";
@@ -18,14 +18,15 @@ class Router {
   constructor(routes, errorRoutes, wrapperId = "wrapper") {
     this.#routes = routes;
     this.#errorRoutes = routes;
+    this.#wrapperId=wrapperId;
   }
   /**
    * analyze current url in url bar of browser
    */
   routeAnalyze() {
     this.#currentPath = location.pathname;
-    console.log(path);
-    if (null === this.#wrapper) {
+    console.log(this.#currentPath);
+    if (!this.#wrapper) {
       this.#wrapper = document.querySelector("#" + this.#wrapperId);
     }
     let currentRoute = this.#routes.find((route) => {
@@ -111,4 +112,4 @@ class Router {
 /**
  * instance globale du routeur
  */
-const router = new Router(routes, errorRoutes);
+export const router = new Router(routes, errorRoutes);
