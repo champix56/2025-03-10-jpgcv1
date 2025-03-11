@@ -17,7 +17,10 @@ var routes = [
 
 var errorRoutes = {
   404: {
-    template: "<h1>404 Not found </h1>",
+    template: "<h1>404 Not found</h1>",
+  },
+  408: {
+    template: "<h1>408 Timeout</h1>",
   },
   500: {
     template: "<h1>500 Internal server error</h1>",
