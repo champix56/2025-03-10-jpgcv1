@@ -1,7 +1,7 @@
 /**
  * Createur d'instance d'un router
  */
-function Router() {
+function Router(routes, errorRoutes) {
   var _currentPath = "/";
   var _privateFieldOnlyInInstance = "coucou";
   function _routeAnalyze() {
@@ -51,4 +51,4 @@ function Router() {
 /**
  * instance globale du routeur
  */
-var router = new Router();
+var router = new Router(routes, errorRoutes);
