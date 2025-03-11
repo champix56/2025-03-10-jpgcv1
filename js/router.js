@@ -4,16 +4,16 @@
  * @param {{}} errorRoutes 
  */
 function Router(routes, errorRoutes) {
-  var _currentPath = "/";
-  var _privateFieldOnlyInInstance = "coucou";
+  let _currentPath = "/";
+  const _privateFieldOnlyInInstance = "coucou";
   function _routeAnalyze() {
-    var path = location.pathname;
+    const path = location.pathname;
     console.log(path);
-    var wrapper = document.getElementById("wrapper");
-    var currentRoute=routes.find((route)=>{
+    const wrapper = document.getElementById("wrapper");
+    let currentRoute=routes.find((route)=>{
         if(typeof route.path==='string' && route.path===path){return true;}
         else if(route.path instanceof RegExp){
-          var m=route.path.exec(path)
+          const m=route.path.exec(path)
           if(m===null)return false;
           else return true;
         }
@@ -52,4 +52,4 @@ function Router(routes, errorRoutes) {
 /**
  * instance globale du routeur
  */
-var router = new Router(routes, errorRoutes);
+const router = new Router(routes, errorRoutes);
