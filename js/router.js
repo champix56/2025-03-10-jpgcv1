@@ -1,5 +1,7 @@
 /**
- * Createur d'instance d'un router
+ * createur d'instance de routeur generique
+ * @param {[]} routes 
+ * @param {{}} errorRoutes 
  */
 function Router(routes, errorRoutes) {
   var _currentPath = "/";
@@ -8,20 +10,16 @@ function Router(routes, errorRoutes) {
     var path = location.pathname;
     console.log(path);
     var wrapper = document.getElementById("wrapper");
-    switch (path) {
-      case "/editor":
-        wrapper.innerHTML = "<h1>Bienvenue sur l'éditeur de meme'</h1>";
-        break;
-      case "/thumbnail":
-        wrapper.innerHTML =
-          "<h1>Bienvenue sur la gallery des memes enregistrés</h1>";
-        break;
-      case "/":
-      default:
-        wrapper.innerHTML =
-          "<h1>Bienvenue sur le site de generation de memes en svg avec js</h1>";
-        break;
-    }
+    var currentRoute=routes.find((route)=>{
+        if(typeof route.path==='string' && route.path===path){return true;}
+        else if(route.path instanceof RegExp){
+          var m=route.path.exec(path)
+          if(m===null)return false;
+          else return true;
+        }
+        else false;
+    });
+    wrapper.innerHTML=currentRoute.template;
   }
   /**
    * navigation vers un path
