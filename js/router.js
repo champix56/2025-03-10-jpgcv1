@@ -30,20 +30,19 @@ function Router(routes, errorRoutes) {
       const promiseFetch = fetch(currentRoute.templateUrl).then((r) =>
         r.text()
       );
-      const timeOut=new Promise((resolved)=>{
+      const timeOut = new Promise((resolved) => {
         setTimeout(() => {
           resolved(errorRoutes[408]);
         }, 1000);
-      })
-      Promise.race([promiseFetch,timeOut]).then(resp=>{
-        if(typeof resp ==='object'){
-          currentRoute=resp;
-        }
-        else{
+      });
+      Promise.race([promiseFetch, timeOut]).then((resp) => {
+        if (typeof resp === "object") {
+          currentRoute = resp;
+        } else {
           currentRoute.template = resp;
           _loadingTemplateInView(currentRoute);
         }
-      })
+      });
     } else {
       _loadingTemplateInView(errorRoutes[500]);
     }
