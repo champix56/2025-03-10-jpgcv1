@@ -28,11 +28,7 @@ function Router(routes, errorRoutes) {
       _loadingTemplateInView(currentRoute);
     } else if (currentRoute.templateUrl) {
       fetch(currentRoute.templateUrl)
-        .then((r) => {
-          //traitement erreur
-          //renvoie du contenue
-          r.text();
-        })
+        .then((r) => r.text())
         .then((contenuDeTemplate) => {
           currentRoute.template = contenuDeTemplate;
           _loadingTemplateInView(currentRoute);
