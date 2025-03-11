@@ -27,20 +27,31 @@ function Router(routes, errorRoutes) {
     if (currentRoute.template) {
       _loadingTemplateInView(currentRoute);
     } else if (currentRoute.templateUrl) {
-      fetch(currentRoute.templateUrl)
-        .then((r) => r.text())
-        .then((contenuDeTemplate) => {
-          currentRoute.template = contenuDeTemplate;
+      const promiseFetch = fetch(currentRoute.templateUrl).then((r) =>
+        r.text()
+      );
+      const timeOut=new Promise((resolved)=>{
+        setTimeout(() => {
+          resolved(errorRoutes[408]);
+        }, 1000);
+      })
+      Promise.race([promiseFetch,timeOut]).then(resp=>{
+        if(typeof resp ==='object'){
+          currentRoute=resp;
+        }
+        else{
+          currentRoute.template = resp;
           _loadingTemplateInView(currentRoute);
-        });
+        }
+      })
     } else {
       _loadingTemplateInView(errorRoutes[500]);
     }
   };
-/**
- * chargement de la route deja chargé(http) dans l'espace dedié a la vue(wrapper)
- * @param {Route} route 
- */
+  /**
+   * chargement de la route deja chargé(http) dans l'espace dedié a la vue(wrapper)
+   * @param {Route} route
+   */
   const _loadingTemplateInView = (route) => {
     wrapper.innerHTML = route.template;
   };
