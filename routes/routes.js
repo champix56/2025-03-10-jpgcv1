@@ -5,11 +5,13 @@ var routes = [
   },
   {
     path: "/thumbnail",
-    template: "<h1>Bienvenue sur la gallery de meme</h1>",
+    templateUrl:'/routes/thumbnail/thumbnail.html'
+    // template: "<h1>Bienvenue sur la gallery de meme</h1>",
   },
   {
     path: /^\/editor(\/(?<id>\d*))?$/,
-    template: "<h1>Editor </h1>",
+    // template: "<h1>Editor </h1>",
+    templateUrl:'/routes/editor/editor.html'
   },
 ];
 
