@@ -41,7 +41,10 @@ function Router(routes, errorRoutes) {
       _loadingTemplateInView(errorRoutes[500]);
     }
   };
-
+/**
+ * chargement de la route deja chargé(http) dans l'espace dedié a la vue(wrapper)
+ * @param {Route} route 
+ */
   const _loadingTemplateInView = (route) => {
     wrapper.innerHTML = route.template;
   };
