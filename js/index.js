@@ -5,4 +5,5 @@ document.addEventListener("DOMContentLoaded", function (evt) {
   //   notLoadedTag.style.backgroundColor = "green";
   notLoadedTag.remove();
   router.routeAnalyze();
+  router.mapRouterLinks('navbar')
 });

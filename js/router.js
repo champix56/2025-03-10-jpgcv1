@@ -34,9 +34,28 @@ function Router() {
     this.currentPath=route;
     _routeAnalyze();
   }
+  this.mapRouterLinks=function(contextId){
+    // var nodes=document.getElementById(contextId).getElementsByTagName('a');
+    // for (var index = 0; index < nodes.length; index++) {
+    //   //ajout de l'ecouteur d'event
+    //   nodes[i].addEventListener(.......);     
+    // }
+    var vm=this;
+    document.querySelectorAll("#"+contextId+" a").forEach(function(element){
+        element.addEventListener('click',function(evt){
+          evt.preventDefault();
+            // hgkjh
+         console.log('event de liens',vm)
+         vm.navigate();
+        })
+    });
+
+  }
+  
   this.navigate=_navigate;
   this.routeAnalyze=_routeAnalyze;
   this.currentPath=_currentPath;
+
 }
 /**
  * instance globale du routeur
