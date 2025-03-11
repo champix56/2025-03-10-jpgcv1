@@ -1,10 +1,9 @@
-
 /**
  * Createur d'instance d'un router
  */
 function Router() {
-  var _currentPath="/";
-  var _privateFieldOnlyInInstance="coucou";
+  var _currentPath = "/";
+  var _privateFieldOnlyInInstance = "coucou";
   function _routeAnalyze() {
     var path = location.pathname;
     console.log(path);
@@ -14,11 +13,13 @@ function Router() {
         wrapper.innerHTML = "<h1>Bienvenue sur l'éditeur de meme'</h1>";
         break;
       case "/thumbnail":
-        wrapper.innerHTML ="<h1>Bienvenue sur la gallery des memes enregistrés</h1>";
+        wrapper.innerHTML =
+          "<h1>Bienvenue sur la gallery des memes enregistrés</h1>";
         break;
       case "/":
       default:
-        wrapper.innerHTML ="<h1>Bienvenue sur le site de generation de memes en svg avec js</h1>";
+        wrapper.innerHTML =
+          "<h1>Bienvenue sur le site de generation de memes en svg avec js</h1>";
         break;
     }
   }
@@ -31,33 +32,23 @@ function Router() {
     if (undefined === route || route.length === 0) route = "/";
     if (route[0] !== "/") route = "/" + route;
     history.pushState(undefined, undefined, route);
-    this.currentPath=route;
+    this.currentPath = route;
     _routeAnalyze();
   }
-  this.mapRouterLinks=function(contextId){
-    // var nodes=document.getElementById(contextId).getElementsByTagName('a');
-    // for (var index = 0; index < nodes.length; index++) {
-    //   //ajout de l'ecouteur d'event
-    //   nodes[i].addEventListener(.......);     
-    // }
-    var vm=this;
-    document.querySelectorAll("#"+contextId+" a").forEach(function(element){
-        element.addEventListener('click',function(evt){
-          evt.preventDefault();
-            // hgkjh
-         console.log('event de liens',vm)
-         vm.navigate();
-        })
+  this.mapRouterLinks = function (contextId) {
+    document.querySelectorAll("#" + contextId + " a").forEach((element) => {
+      element.addEventListener("click", (evt) => {
+        evt.preventDefault();
+        this.navigate(element.href.replace(location.origin, ""));
+      });
     });
+  };
 
-  }
-  
-  this.navigate=_navigate;
-  this.routeAnalyze=_routeAnalyze;
-  this.currentPath=_currentPath;
-
+  this.navigate = _navigate;
+  this.routeAnalyze = _routeAnalyze;
+  this.currentPath = _currentPath;
 }
 /**
  * instance globale du routeur
  */
-var router=new Router();
+var router = new Router();
