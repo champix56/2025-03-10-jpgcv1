@@ -19,6 +19,9 @@ function Router(routes, errorRoutes) {
         }
         else false;
     });
+    if(undefined===currentRoute){
+      currentRoute=errorRoutes[404];
+    }
     wrapper.innerHTML=currentRoute.template;
   }
   /**
