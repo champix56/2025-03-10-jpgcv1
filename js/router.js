@@ -3,10 +3,10 @@
  * @param {[]} routes 
  * @param {{}} errorRoutes 
  */
-function Router(routes, errorRoutes) {
+function Router(routes, errorRoutes){
   let _currentPath = "/";
   const _privateFieldOnlyInInstance = "coucou";
-  function _routeAnalyze() {
+  const _routeAnalyze=()=>{
     const path = location.pathname;
     console.log(path);
     const wrapper = document.getElementById("wrapper");
@@ -29,14 +29,14 @@ function Router(routes, errorRoutes) {
    * @param {string} route path a mettre en oeuvre
    * @returns {undefined} ne retourne rien
    */
-  function _navigate(route) {
+  const _navigate=(route)=>{
     if (undefined === route || route.length === 0) route = "/";
     if (route[0] !== "/") route = "/" + route;
     history.pushState(undefined, undefined, route);
     this.currentPath = route;
     _routeAnalyze();
   }
-  this.mapRouterLinks = function (contextId) {
+  const  _mapRouterLinks= (contextId) =>{
     document.querySelectorAll("#" + contextId + " a").forEach((element) => {
       element.addEventListener("click", (evt) => {
         evt.preventDefault();
@@ -45,6 +45,7 @@ function Router(routes, errorRoutes) {
     });
   };
 
+  this.mapRouterLinks =_mapRouterLinks;
   this.navigate = _navigate;
   this.routeAnalyze = _routeAnalyze;
   this.currentPath = _currentPath;
