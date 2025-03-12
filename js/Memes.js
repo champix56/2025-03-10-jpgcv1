@@ -38,6 +38,7 @@ class Meme {
     );
     const meme = await pmeme.json();
     Object.assign(this, meme);
+    return this;
   };
 }
 
@@ -55,10 +56,14 @@ class Memes extends Array {
   /**
    *
    * @param {Meme} meme
+   * @returns {Meme} rest filled saved meme
    */
-  push(meme) {
-    meme.save();
-    return super.push(meme);
+  push=async(meme)=> {
+    const returnedMeme= await meme.save();
+
+     super.push(returnedMeme);
+     
+     return returnedMeme;
   }
   replace(meme) {
     const i = this.findIndex((memeInList) => memeInList.id === meme.id);
