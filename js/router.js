@@ -35,7 +35,7 @@ class Router {
   routeAnalyze() {
     const path = location.pathname;
     console.log(path);
-    this.#wrapper = document.getElementById(this.#wrapperId);
+    this.wrapperId = this.#wrapperId;
     let currentRoute = this.#routes.find((route) => {
       if (typeof route.path === "string" && route.path === path) {
         return true;
@@ -90,7 +90,7 @@ class Router {
     if (undefined === route || route.length === 0) route = "/";
     if (route[0] !== "/") route = "/" + route;
     history.pushState(undefined, undefined, route);
-    this.currentPath = route;
+    this.#currentPath = route;
     this.routeAnalyze();
   }
   mapRouterLinks(contextId) {
@@ -101,7 +101,16 @@ class Router {
       });
     });
   }
-
+  get currentPath() {
+    return this.#currentPath;
+  }
+  get fullCurrentPath(){
+    return location.origin+this.#currentPath;
+  }
+  set wrapperId(value){
+    this.#wrapperId=value;
+    this.#wrapper=document.getElementById(value);
+  }
   // this.mapRouterLinks = _mapRouterLinks;
   // this.navigate = _navigate;
   // this.routeAnalyze = _routeAnalyze;
