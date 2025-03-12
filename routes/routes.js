@@ -1,4 +1,7 @@
-var routes = [
+import '../js/config.js'
+import './editor/editor.js'
+import '../js/Images.js'
+window. routes = [
   {
     path: "/",
     template: "<h1>Bienvenue sur l'éditeur de meme</h1>",
@@ -11,11 +14,12 @@ var routes = [
   {
     path: /^\/editor(\/(?<id>\d*))?$/,
     // template: "<h1>Editor </h1>",
-    templateUrl:'/routes/editor/editor.html'
+    templateUrl:'/routes/editor/editor.html',
+    onLoaded:(route)=>{initEditor('wrapper')},
   },
 ];
 
-var errorRoutes = {
+window.errorRoutes = {
   404: {
     template: "<h1>404 Not found</h1>",
   },

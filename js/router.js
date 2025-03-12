@@ -1,3 +1,5 @@
+
+
 /**
  * class de routeur generique
  * @param {[]} routes
@@ -72,6 +74,7 @@ export default class Router {
    */
   #loadingTemplateInView(route) {
     this.#wrapper.innerHTML = route.template;
+    if(route.onLoaded)route.onLoaded(route);
   }
 
   /**
@@ -113,3 +116,4 @@ export default class Router {
  * instance globale du routeur
  */
 export const router = new Router(routes, errorRoutes);
+window.router=router;

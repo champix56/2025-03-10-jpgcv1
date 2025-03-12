@@ -1,0 +1,1 @@
+window.REST_SERVER='http://localhost:5679'

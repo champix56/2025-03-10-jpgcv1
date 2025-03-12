@@ -1,0 +1,12 @@
+<svg width="100%" height="100%" viewBox="0 0 686 386" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- image -->
+    <image
+        xlink:href="https://i.ytimg.com/vi/qVLMoZd8wbU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDsqk71BFAtidvsYrWPLmMEx5EedA"
+        x="0" y="0" />
+    <!-- text -->
+    <text x="0" y="100" style="font-weight: 900; text-decoration: underline; fill: tomato" stroke="skyblue"
+        font-size="48" font-style="italic">
+        Le js c'est un jeu d'enfant
+    </text>
+</svg>
