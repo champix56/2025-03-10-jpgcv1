@@ -81,6 +81,7 @@ class Memes extends Array {
         r(this);
       });
     }
+    this.#isLoaded=false;
     const pr = await fetch(`http://localhost:5679${Meme.RESSOURCE_URI}`);
     const arr = await pr.json();
     this.splice(0);
@@ -92,4 +93,4 @@ class Memes extends Array {
   };
 }
 const memes = new Memes();
-memes.loadMemes();
+const pullingRefresMemesList=setInterval(()=>{memes.loadMemes()}, 5000);
