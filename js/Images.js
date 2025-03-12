@@ -22,6 +22,7 @@ class Images extends Array {
     return this;
   };
 }
+
 const images=new Images();
 const loadedImages=images.loadImage();
-console.log(images);
+loadedImages.then(images=>{console.log(images)})
