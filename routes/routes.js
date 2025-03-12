@@ -7,6 +7,14 @@ var routes = [
     path: "/thumbnail",
     templateUrl: "/routes/thumbnail/thumbnail.html",
     // template: "<h1>Bienvenue sur la gallery de meme</h1>",
+    onTemplateLoaded: (domNode) => {
+      console.log( domNode);
+      if (!window.viewsjs) {
+        window.viewsjs = {};
+      }
+      window.viewsjs.Thumbnail = new Thumbnail();
+      window.viewsjs.Thumbnail.initThumbnail(domNode);
+    },
   },
   {
     path: /^\/editor(\/(?<id>\d*))?$/,
