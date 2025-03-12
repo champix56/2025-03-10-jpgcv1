@@ -1,17 +1,4 @@
-const emptyMeme = {
-  titre: "",
-  text: "",
-  x: 0,
-  y: 17,
-  fontWeight: "500",
-  fontSize: 30,
-  underline: false,
-  italic: false,
-  imageId: 0,
-  color: "#000000",
-  frameSizeX: 0,
-  frameSizeY: 0,
-};
+const emptyMeme = new Meme();
 
 class Editor {
   meme = emptyMeme;
@@ -108,6 +95,17 @@ class Editor {
     form["image"].addEventListener("change", (evt) => {
       this.meme.imageId = Number(evt.target.value);
       this.#updateSvg();
+    });
+
+    form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+      if (undefined === this.meme.id) {
+        memes.push(this.meme).then((returnedMeme) => {
+          this.meme = returnedMeme;
+          history.pushState(null, null, "/editor/" + returnedMeme.id);
+          console.log("saved", this.meme);
+        });
+      } else this.meme.save();
     });
   }
 
