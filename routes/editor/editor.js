@@ -15,6 +15,7 @@ const emptyMeme = {
 
 class Editor {
   meme = emptyMeme;
+  #imageNode;
   #params = {};
   /**
    * @type HTMLElement
@@ -36,8 +37,10 @@ class Editor {
       return;
     }
     this.#domNode = domNode;
+    this.#imageNode = domNode.querySelector("image");
     this.#fillSelect();
     this.#fillFormEvent();
+    this.#updateSvg();
   }
   #fillFormEvent() {
     // const onInputGeneric = (evt) => {
@@ -59,10 +62,10 @@ class Editor {
       this.#updateSvg();
     };
     const onCheckChange = (evt) => {
-        this.meme[evt.target.name] = evt.target.checked;
-        console.log(this.meme);
-        this.#updateSvg();
-      };
+      this.meme[evt.target.name] = evt.target.checked;
+      console.log(this.meme);
+      this.#updateSvg();
+    };
 
     const form = this.#domNode.querySelector("form");
     form["titre"].addEventListener("input", onInputString);
@@ -70,7 +73,7 @@ class Editor {
     form["color"].addEventListener("input", onInputString);
     form["fontWeight"].addEventListener("input", onInputString);
     form["x"].addEventListener("input", onInputNumber);
-    form["x"].addEventListener("input", onInputNumber);
+    form["y"].addEventListener("input", onInputNumber);
     form["frameSizeX"].addEventListener("input", onInputNumber);
     form["frameSizeY"].addEventListener("input", onInputNumber);
     form["fontSize"].addEventListener("input", onInputNumber);
@@ -104,8 +107,33 @@ class Editor {
     });
   };
   #fillData() {}
-  #updateSvg() {
-
-    
-  }
+  #updateSvg = async () => {
+    const svg = this.#domNode.querySelector("svg");
+    const text = svg.querySelector("text");
+    const imagesList = await images.loadImage();
+    const currentImg = imagesList.find(this.meme.imageId);
+    svg.setAttribute(
+      "viewBox",
+      `0 0 ${currentImg ? currentImg.w : "1000"} ${
+        currentImg ? currentImg.h : "1000"
+      }`
+    );
+    if (!currentImg) {
+      this.#imageNode.remove();
+    }
+    if (currentImg) {
+      if (!svg.querySelector("image")) {
+        svg.insertBefore(this.#imageNode, text);
+      }
+      svg.querySelector("image").setAttribute("xlink:href", currentImg.url);
+    }
+    text.innerHTML = this.meme.text;
+    text.setAttribute("x", this.meme.x);
+    text.setAttribute("y", this.meme.y);
+    text.setAttribute("font-style", this.meme.italic ? "italic" : "normal");
+    text.setAttribute("font-size", this.meme.fontSize);
+    text.style.textDecoration = this.meme.underline ? "underline" : "none";
+    text.style.fontWeight = this.meme.fontWeight;
+    text.style.fill = this.meme.color;
+  };
 }
