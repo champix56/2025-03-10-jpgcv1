@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "lite-server"
+    "start": "npm run http | npm run json",
+    "json":"json-server -p 5679 db.json",
+    "http":"lite-server",
+    "tsc": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "lite-server": "^2.6.1"
+    "lite-server": "^2.6.1",
+    "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4"
   }
 }
