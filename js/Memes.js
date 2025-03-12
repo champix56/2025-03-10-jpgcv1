@@ -1,5 +1,8 @@
 class Meme {
   static #RESSOURCE_URI = "/memes";
+  static get RESSOURCE_URI() {
+    return this.#RESSOURCE_URI;
+  }
   titre = "";
   text = "";
   x = 0;
@@ -76,8 +79,12 @@ class Memes extends Array {
     const pr = await fetch(`http://localhost:5679${Meme.RESSOURCE_URI}`);
     const arr = await pr.json();
     this.splice(0);
-    super.push(...arr);
+    arr.forEach((m) => {
+      super.push(Object.assign(new Meme(), m));
+    });
     this.#isLoaded = true;
     return this;
   };
 }
+const memes = new Memes();
+memes.loadMemes();
