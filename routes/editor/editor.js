@@ -30,27 +30,34 @@ class Editor {
    * initialisation de la vues, des events, du meme en cours
    * @param {HTMLElement} domNode
    */
-  initEditor(domNode, params) {
-    console.log(arguments);
+  initEditor = async (domNode, params) => {
+    //non disponible dans les arrow function
+    // console.log(arguments);
     this.#params = params;
     if (!domNode) {
       return;
     }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
-    this.#fillSelect().then((r) => {
-      console.log(this.meme)
-      this.#fillFormDatas();
-    });
+    await this.#fillSelect();
+    if (params && undefined !== params.id) {
+      const loadedMemes = await memes.loadMemes();
+      this.meme = memes.find(Number(params.id));
+      if (!this.meme) {
+        router.navigate("/editor");
+        return;
+      }
+    }
+    this.#fillFormDatas();
     this.#fillFormEvent();
 
     this.#updateSvg();
-  }
+  };
   #fillFormDatas() {
     const form = this.#domNode.querySelector("form");
     form.querySelectorAll("input").forEach((input) => {
       const value = this.meme[input.name];
-      if (undefined===value) {
+      if (undefined === value) {
         return;
       }
       if (input.type == "checkbox") {
