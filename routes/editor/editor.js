@@ -38,9 +38,28 @@ class Editor {
     }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
-    this.#fillSelect();
+    this.#fillSelect().then((r) => {
+      console.log(this.meme)
+      this.#fillFormDatas();
+    });
     this.#fillFormEvent();
+
     this.#updateSvg();
+  }
+  #fillFormDatas() {
+    const form = this.#domNode.querySelector("form");
+    form.querySelectorAll("input").forEach((input) => {
+      const value = this.meme[input.name];
+      if (undefined===value) {
+        return;
+      }
+      if (input.type == "checkbox") {
+        input.checked = value;
+      } else {
+        input.value = value;
+      }
+    });
+    form["image"].value = this.meme.imageId;
   }
   #fillFormEvent() {
     // const onInputGeneric = (evt) => {
@@ -106,7 +125,6 @@ class Editor {
       // image.parentElement.appendChild(i);
     });
   };
-  #fillData() {}
   #updateSvg = async () => {
     const svg = this.#domNode.querySelector("svg");
     const text = svg.querySelector("text");
