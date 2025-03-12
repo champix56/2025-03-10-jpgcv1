@@ -1,4 +1,8 @@
-class Thumbnail {
+import { images } from "../../js/Images.js";
+import { memes } from "../../js/Memes.js";
+import router from "../../js/router.js";
+
+export class Thumbnail {
   #domNode;
   constructor() {}
   initThumbnail = async (domNode) => {
