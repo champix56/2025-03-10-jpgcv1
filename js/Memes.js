@@ -1,4 +1,4 @@
-class Meme {
+export class Meme {
   static #RESSOURCE_URI = "/memes";
   static get RESSOURCE_URI() {
     return this.#RESSOURCE_URI;
@@ -58,13 +58,13 @@ class Memes extends Array {
    * @param {Meme} meme
    * @returns {Meme} rest filled saved meme
    */
-  push=async(meme)=> {
-    const returnedMeme= await meme.save();
+  push = async (meme) => {
+    const returnedMeme = await meme.save();
 
-     super.push(returnedMeme);
-     
-     return returnedMeme;
-  }
+    super.push(returnedMeme);
+
+    return returnedMeme;
+  };
   replace(meme) {
     const i = this.findIndex((memeInList) => memeInList.id === meme.id);
     this[i] = meme;
@@ -81,7 +81,7 @@ class Memes extends Array {
         r(this);
       });
     }
-    this.#isLoaded=false;
+    this.#isLoaded = false;
     const pr = await fetch(`http://localhost:5679${Meme.RESSOURCE_URI}`);
     const arr = await pr.json();
     this.splice(0);
@@ -92,5 +92,7 @@ class Memes extends Array {
     return this;
   };
 }
-const memes = new Memes();
-const pullingRefresMemesList=setInterval(()=>{memes.loadMemes()}, 5000);
+export const memes = new Memes();
+const pullingRefresMemesList = setInterval(() => {
+  memes.loadMemes();
+}, 5000);

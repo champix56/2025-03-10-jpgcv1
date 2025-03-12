@@ -34,6 +34,6 @@ class Images extends Array {
   };
 }
 
-const images=new Images();
+export const images=new Images();
 const loadedImages=images.loadImage();
 loadedImages.then(images=>{console.log(images)})

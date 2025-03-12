@@ -1,6 +1,9 @@
+import { images } from "../../js/Images.js";
+import { memes, Meme } from "../../js/Memes.js";
+
 const emptyMeme = new Meme();
 
-class Editor {
+export class Editor {
   meme = emptyMeme;
   #imageNode;
   #params = {};

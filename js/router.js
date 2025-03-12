@@ -31,9 +31,23 @@ class Router {
     this.#routes = routes;
     this.#errorRoutes = errorRoutes;
     this.#wrapperId = wrapperId;
-    window.addEventListener('popstate',(evt)=>{
+    window.addEventListener("popstate", (evt) => {
       this.routeAnalyze();
-    })
+    });
+  }
+  initRouter(routes, errorRoutes, wrapperId = "wrapper") {
+    this.initRoutes(routes, errorRoutes);
+    this.wrapperId=wrapperId;
+  }
+  initRoutes(routes, errorRoutes) {
+    this.#routes = routes;
+    this.#errorRoutes = errorRoutes;
+  }
+  set wrapper(domNode) {
+    this.#wrapper = domNode;
+  }
+  set wrapperId(wrapperId) {
+    this.#wrapper = document.querySelector("#" + wrapperId);
   }
   routeAnalyze() {
     const path = location.pathname;
@@ -89,7 +103,7 @@ class Router {
       route.onTemplateLoaded &&
       typeof route.onTemplateLoaded === "function"
     ) {
-      route.onTemplateLoaded(this.#wrapper,route.params);
+      route.onTemplateLoaded(this.#wrapper, route.params);
     }
   }
   /**
@@ -127,4 +141,5 @@ class Router {
 /**
  * instance globale du routeur
  */
-const router = new Router(routes, errorRoutes);
+const router = new Router();
+export default router;

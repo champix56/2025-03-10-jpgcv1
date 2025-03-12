@@ -1,4 +1,6 @@
-var routes = [
+import {Thumbnail} from './thumbnail/thumbnail.js'
+import {Editor} from './editor/editor.js'
+export const routes = [
   {
     path: "/",
     template: "<h1>Bienvenue sur l'éditeur de meme</h1>",
@@ -31,7 +33,7 @@ var routes = [
   },
 ];
 
-var errorRoutes = {
+export const errorRoutes = {
   404: {
     template: "<h1>404 Not found</h1>",
   },
