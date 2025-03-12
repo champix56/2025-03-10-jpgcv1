@@ -42,7 +42,10 @@ class Router {
       } else if (route.path instanceof RegExp) {
         const m = route.path.exec(path);
         if (m === null) return false;
-        else return true;
+        else {
+          route.params = m.groups;
+          return true;
+        }
       } else false;
     });
 
@@ -79,8 +82,13 @@ class Router {
    */
   #loadingTemplateInView(route) {
     this.#wrapper.innerHTML = route.template;
+    if (
+      route.onTemplateLoaded &&
+      typeof route.onTemplateLoaded === "function"
+    ) {
+      route.onTemplateLoaded(this.#wrapper,route.params);
+    }
   }
-
   /**
    * navigation vers un path
    * @param {string} route path a mettre en oeuvre
@@ -104,17 +112,13 @@ class Router {
   get currentPath() {
     return this.#currentPath;
   }
-  get fullCurrentPath(){
-    return location.origin+this.#currentPath;
+  get fullCurrentPath() {
+    return location.origin + this.#currentPath;
   }
-  set wrapperId(value){
-    this.#wrapperId=value;
-    this.#wrapper=document.getElementById(value);
+  set wrapperId(value) {
+    this.#wrapperId = value;
+    this.#wrapper = document.getElementById(value);
   }
-  // this.mapRouterLinks = _mapRouterLinks;
-  // this.navigate = _navigate;
-  // this.routeAnalyze = _routeAnalyze;
-  // this.currentPath = _currentPath;
 }
 
 /**
