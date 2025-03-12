@@ -15,13 +15,13 @@ class Images extends Array {
     return super.find((img) => img.id === id);
   }
   filter = undefined;
-  loadImage() {
-    return fetch(`http://localhost:5679${Images.RESSOURCE_URI}`)
-      .then((r) => r.json())
-      .then((arr) => {
-        super.push(...arr);
-        return this;
-      });
-  }
+  loadImage = async () => {
+    const pr = await fetch(`http://localhost:5679${Images.RESSOURCE_URI}`);
+    const arr = await pr.json();
+    super.push(...arr);
+    return this;
+  };
 }
-
+const images=new Images();
+const loadedImages=images.loadImage();
+console.log(images);
