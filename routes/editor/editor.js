@@ -2,6 +2,7 @@ const emptyMeme = new Meme();
 
 class Editor {
   meme = emptyMeme;
+  #oldMeme = Object.assign(new Meme(),emptyMeme);
   #imageNode;
   #params = {};
   /**
@@ -26,6 +27,7 @@ class Editor {
     if(params&&params.id){
       const loadedMemePromise= await memes.loadMemes()
       this.meme=loadedMemePromise.find(Number(params.id));
+      this.#oldMeme=Object(new Meme(),this.meme);
     }
     if(!this.meme){
       // this.meme=new Meme();
@@ -83,7 +85,10 @@ class Editor {
       this.#updateSvg();
     });
 
-    form.addEventListener("submit", (evt) => {
+    form.addEventListener("reset", (evt) => {
+      this.meme=Object.assign(this.meme,this.#oldMeme);
+    })
+      form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       if (this.meme.id) {
         this.meme.save();
