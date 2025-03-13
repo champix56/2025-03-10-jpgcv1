@@ -101,6 +101,9 @@ class Router {
     this.#currentPath = route;
     this.routeAnalyze();
   }
+  error(code){
+    this.#loadingTemplateInView(this.#errorRoutes[code]);
+  }
   mapRouterLinks(contextId) {
     document.querySelectorAll("#" + contextId + " a").forEach((element) => {
       element.addEventListener("click", (evt) => {
