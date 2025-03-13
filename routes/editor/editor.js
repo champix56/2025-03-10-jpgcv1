@@ -17,7 +17,7 @@ class Editor {
    * initialisation de la vues, des events, du meme en cours
    * @param {HTMLElement} domNode
    */
-  initEditor=async(domNode, params)=> {
+  initEditor = async (domNode, params) => {
     //console.log(arguments);
     this.#params = params;
     if (!domNode) {
@@ -25,12 +25,12 @@ class Editor {
     }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
-    await this.#fillSelect()//.then(()=>{
-      this.#fillData();
+    await this.#fillSelect(); //.then(()=>{
+    this.#fillData();
     //});
     this.#fillFormEvent();
     this.#updateSvg();
-  }
+  };
   #fillFormEvent() {
     // const onInputGeneric = (evt) => {
     //     switch(typeof  this.meme[evt.target.name]){
@@ -73,10 +73,13 @@ class Editor {
       this.#updateSvg();
     });
 
-    form.addEventListener('submit',(evt)=>{
+    form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.meme.save();.then(m=>{console.log(this.meme)})
-    })
+      this.meme.save().then((m) => {
+        console.log(this.meme);
+        history.pushState(undefined, undefined, "/editor/" + this.meme.id);
+      });
+    });
   }
 
   #fillSelect = async () => {
@@ -109,7 +112,7 @@ class Editor {
         input.value = this.meme[input.name];
       }
     });
-    form["image"].value=this.meme.imageId;
+    form["image"].value = this.meme.imageId;
   }
   #updateSvg = async () => {
     const svg = this.#domNode.querySelector("svg");
