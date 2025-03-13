@@ -83,7 +83,7 @@ class Memes extends Array {
         console.log(arr);
         this.splice(0);
         arr.map((jmeme) => {
-          super.push(new Meme(), jmeme);
+          super.push(Object.assign(new Meme(), jmeme));
         });
         this.#pr = undefined;
         this.#isLoaded = true;
