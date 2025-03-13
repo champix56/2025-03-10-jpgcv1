@@ -6,6 +6,14 @@ const routes = [
   {
     path: "/thumbnail",
     templateUrl: "/routes/thumbnail/thumbnail.html",
+    onTemplateLoaded: (domNode) => {
+      // console.log(params, domNode);
+      if (!window.viewsjs) {
+        window.viewsjs = {};
+      }
+      window.viewsjs.Thumbnail = new Thumbnail();
+      window.viewsjs.Thumbnail.initThumbnail(domNode);
+    },
   },
   {
     path: /^\/editor(\/(?<id>\d*))?$/,
