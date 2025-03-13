@@ -7,7 +7,7 @@ const emptyMeme = {
   fontSize: 30,
   underline: false,
   italic: false,
-  imageId: 0,
+  imageId: 1,
   color: "#000000",
   frameSizeX: 0,
   frameSizeY: 0,
@@ -30,15 +30,17 @@ class Editor {
    * initialisation de la vues, des events, du meme en cours
    * @param {HTMLElement} domNode
    */
-  initEditor(domNode, params) {
-    console.log(arguments);
+  initEditor=(domNode, params)=> {
+    //console.log(arguments);
     this.#params = params;
     if (!domNode) {
       return;
     }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
-    this.#fillSelect();
+    this.#fillSelect().then(()=>{
+      this.#fillData();
+    });
     this.#fillFormEvent();
     this.#updateSvg();
   }
@@ -106,7 +108,17 @@ class Editor {
       // image.parentElement.appendChild(i);
     });
   };
-  #fillData() {}
+  #fillData() {
+    const form = this.#domNode.querySelector("form");
+    form.querySelectorAll("input").forEach((input) => {
+      if (input.type === "checkbox") {
+        input.checked = this.meme[input.name];
+      } else {
+        input.value = this.meme[input.name];
+      }
+    });
+    form["image"].value=this.meme.imageId;
+  }
   #updateSvg = async () => {
     const svg = this.#domNode.querySelector("svg");
     const text = svg.querySelector("text");
