@@ -1,5 +1,8 @@
 import { errorRoutes, routes } from "../routes/routes.js";
 import router from "./router.js";
+import '/styles/style.css'
+import '/node_modules/bootstrap/dist/css/bootstrap.css'
+import '/node_modules/bootstrap/dist/js/bootstrap.js'
 /**
  * instance globale du routeur
  */
