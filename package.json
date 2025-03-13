@@ -4,9 +4,12 @@
   "description": "",
   "scripts": {
     "start": "npm run http | npm run json",
-    "json":"json-server -p 5679 db.json",
-    "http":"lite-server",
-    "tsc": "tsc"
+    "json": "json-server -p 5679 db.json",
+    "http": "lite-server",
+    "tsc": "tsc",
+    "build": "webpack",
+    "build-watch": "webpack --watch",
+    "develop": "webpack-dev-server --open && npm run develop"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,15 @@
     "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "json-server": "^0.17.4"
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "json-server": "^0.17.4",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
   }
 }
