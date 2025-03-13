@@ -75,10 +75,13 @@ class Editor {
 
     form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.meme.save().then((m) => {
-        console.log(this.meme);
-        history.pushState(undefined, undefined, "/editor/" + this.meme.id);
-      });
+      if (this.meme.id) {
+        this.meme.save();
+      } else {
+        memes.push(this.meme).then((m) => {
+          history.pushState(undefined, undefined, "/editor/" + this.meme.id);
+        });
+      }
     });
   }
 
