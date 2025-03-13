@@ -1,5 +1,6 @@
-import Thumbnail from "./thumbnail/thumbnail.js";
-import Editor from "./editor/editor.js";
+// import Thumbnail from "./thumbnail/thumbnail.js";
+// import Editor from "./editor/editor.js";
+const loadedModules={};
 export const routes = [
   {
     path: "/",
@@ -8,12 +9,15 @@ export const routes = [
   {
     path: "/thumbnail",
     templateUrl: "/routes/thumbnail/thumbnail.html",
-    onTemplateLoaded: (domNode) => {
+    onTemplateLoaded:async (domNode) => {
       // console.log(params, domNode);
       if (!window.viewsjs) {
         window.viewsjs = {};
       }
-      window.viewsjs.Thumbnail = new Thumbnail();
+      if (!loadedModules.thumbnailjs) {
+        loadedModules.thumbnailjs = await import("./thumbnail/thumbnail.js");
+      }
+      window.viewsjs.Thumbnail = new loadedModules.thumbnailjs.default();
       window.viewsjs.Thumbnail.initThumbnail(domNode);
     },
   },
@@ -21,12 +25,15 @@ export const routes = [
     path: /^\/editor(\/(?<id>\d*))?$/,
     // template: "<h1>Editor </h1>",
     templateUrl: "/routes/editor/editor.html",
-    onTemplateLoaded: (domNode, params) => {
+    onTemplateLoaded:async (domNode, params) => {
       console.log(params, domNode);
       if (!window.viewsjs) {
         window.viewsjs = {};
       }
-      window.viewsjs.Editor = new Editor();
+      if (!loadedModules.editorjs) {
+        loadedModules.editorjs = await import("./editor/editor.js");
+      }
+      window.viewsjs.Editor = new loadedModules.editorjs.default();
       window.viewsjs.Editor.initEditor(domNode, params);
     },
   },
