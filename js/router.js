@@ -32,6 +32,11 @@ class Router {
     this.#errorRoutes = errorRoutes;
     this.#wrapperId = wrapperId;
   }
+  initRoutes(routes, errorRoutes, wrapperId = "wrapper") {
+    this.#routes = routes;
+    this.#errorRoutes = errorRoutes;
+    this.#wrapperId = wrapperId;
+  }
   routeAnalyze() {
     const path = location.pathname;
     console.log(path);
@@ -127,4 +132,7 @@ class Router {
 /**
  * instance globale du routeur
  */
-const router = new Router(routes, errorRoutes);
+export const router = new Router();
+export default router;
+export const navigate=router.navigate;
+export const routeAnalyze=()=>{return router.routeAnalyze()};

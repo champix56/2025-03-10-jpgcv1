@@ -1,4 +1,6 @@
-const routes = [
+import Thumbnail from "./thumbnail/thumbnail.js";
+import Editor from "./editor/editor.js";
+export const routes = [
   {
     path: "/",
     template: "<h1>Bienvenue sur l'éditeur de meme</h1>",
@@ -30,7 +32,7 @@ const routes = [
   },
 ];
 
-const errorRoutes = {
+export const errorRoutes = {
   404: {
     template: '<div id="error-404" style="padding:50px"><h1>404 Not found</h1></div>',
     onTemplateLoaded: (domNode) => {

@@ -1,4 +1,4 @@
-class Meme {
+export class Meme {
   static #RESSOURCE_URI = "/memes";
   static get RESSOURCE_URI() {
     return Meme.#RESSOURCE_URI;
@@ -92,7 +92,7 @@ class Memes extends Array {
     });
   };
 }
-const memes = new Memes();
+export const memes = new Memes();
 
 let interval=undefined;
 window.addEventListener('offline',()=>{

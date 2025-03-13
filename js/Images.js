@@ -4,9 +4,6 @@ class Images extends Array {
   static get RESSOURCE_URI() {
     return Images.#RESSOURCE_URI;
   }
-  constructor() {
-    super();
-  }
   /**
    * trouve l'image dont l'id est fournit en param
    * @param {number} id id de l'image a trouver
@@ -34,6 +31,8 @@ class Images extends Array {
   };
 }
 
-const images=new Images();
-const loadedImages=images.loadImage();
-loadedImages.then(images=>{console.log(images)})
+export const images=new Images();
+export const loadedImages=()=>images.loadImage();
+//const loadedImages=
+images.loadImage();
+//loadedImages.then(images=>{console.log(images)})
