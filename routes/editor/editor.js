@@ -1,17 +1,4 @@
-const emptyMeme = {
-  titre: "",
-  text: "",
-  x: 0,
-  y: 17,
-  fontWeight: "500",
-  fontSize: 30,
-  underline: false,
-  italic: false,
-  imageId: 1,
-  color: "#000000",
-  frameSizeX: 0,
-  frameSizeY: 0,
-};
+const emptyMeme = new Meme();
 
 class Editor {
   meme = emptyMeme;
@@ -85,6 +72,11 @@ class Editor {
       this.meme.imageId = Number(evt.target.value);
       this.#updateSvg();
     });
+
+    form.addEventListener('submit',(evt)=>{
+      evt.preventDefault();
+      this.meme.save();.then(m=>{console.log(this.meme)})
+    })
   }
 
   #fillSelect = async () => {
