@@ -44,7 +44,9 @@ class Meme {
 class Memes extends Array {
   #isLoaded = false;
   #pr = undefined;
-  find(id) {}
+  find(id) {
+    return super.find(m=>m.id===id);
+  }
   /**
    * ajoute dans la liste un nouveau meme et post au server pour creationd'id
    * @param {Meme} meme
