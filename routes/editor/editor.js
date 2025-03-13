@@ -87,6 +87,8 @@ class Editor {
 
     form.addEventListener("reset", (evt) => {
       this.meme=Object.assign(this.meme,this.#oldMeme);
+      this.#fillData();
+      this.#updateSvg();
     })
       form.addEventListener("submit", (evt) => {
       evt.preventDefault();
