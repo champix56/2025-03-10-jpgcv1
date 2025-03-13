@@ -10,7 +10,7 @@ class Thumbnail {
   initThumbnail = async (domNode) => {
     this.#domNode = domNode;
     this.#baseToClone = this.#domNode.querySelector("#thumb-meme-");
-    this.remove();
+    this.#baseToClone.remove();
     const pri = images.loadImage();
     const prm = memes.loadMemes();
     const prAll = await Promise.all([pri, prm]);
