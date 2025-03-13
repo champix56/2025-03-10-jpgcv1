@@ -108,7 +108,7 @@ class Router {
     document.querySelectorAll("#" + contextId + " a").forEach((element) => {
       element.addEventListener("click", (evt) => {
         evt.preventDefault();
-        this.navigate(evt.target.href.replace(location.origin, ""));
+        this.navigate(evt.currentTarget.href.replace(location.origin, ""));
       });
     });
   }
