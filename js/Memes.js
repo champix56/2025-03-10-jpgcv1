@@ -93,13 +93,23 @@ class Memes extends Array {
   };
 }
 const memes = new Memes();
-console.time("start loading");
-console.time("loading1");
-memes.loadMemes().then(() => {
-  console.timeEnd("loading1");
-});
-console.time("loading2");
-memes.loadMemes().then(() => {
-  console.timeEnd("loading2");
-});
-console.timeEnd("start loading");
+
+let interval=undefined;
+window.addEventListener('offline',()=>{
+   if(interval)  clearInterval(interval);
+})
+window.addEventListener('online',()=>{
+   interval = setInterval(()=>{
+        memes.loadMemes(true);
+    },1000)
+})
+// console.time("start loading");
+// console.time("loading1");
+// memes.loadMemes().then(() => {
+//   console.timeEnd("loading1");
+// });
+// console.time("loading2");
+// memes.loadMemes().then(() => {
+//   console.timeEnd("loading2");
+// });
+// console.timeEnd("start loading");
