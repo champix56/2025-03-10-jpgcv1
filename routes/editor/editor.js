@@ -23,6 +23,16 @@ class Editor {
     if (!domNode) {
       return;
     }
+    if(params&&params.id){
+      const loadedMemePromise= await memes.loadMemes()
+      this.meme=loadedMemePromise.find(Number(params.id));
+    }
+    if(!this.meme){
+      // this.meme=new Meme();
+      // history.pushState(null,null,'/editor');
+      router.error(404);
+      return;
+    }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
     await this.#fillSelect(); //.then(()=>{
