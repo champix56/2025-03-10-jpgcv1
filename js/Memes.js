@@ -19,7 +19,22 @@ class Meme {
    * enregistre l'instance du meme
    * @returns {Meme} server return meme on POST/PUT
    */
-  save() {}
+  save = async () => {
+    const pr = await fetch(
+      `${REST_BASE_URL}${Meme.RESSOURCE_URI}${
+        undefined !== this.id ? `/${this.id}` : ""
+      }`,
+      {
+        method: undefined !== this.id ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this),
+      }
+    );
+    const datas = await pr.json();
+    return Object.assign(this, datas);
+  };
   //   static getInstanceFromParsedObject(memeObject){
   //     const m=new Meme();
   //     Object.assign(m,jsonMemeObject);
@@ -49,11 +64,15 @@ class Memes extends Array {
     return this.#pr;
   };
   loadMemes = async (force = false) => {
+    //retour de ce qui est deja totalement resolue
     if (!force && this.#isLoaded) {
       return await new Promise((r) => {
         r(this);
       });
     }
+    //sinon retour de la promise de traitement complet
+    //pour pouvoir toujours await ou the la fin total du traitement
+    //avec toujours l'instance this de l'array en charge de rsolution complete
     return new Promise((resolved) => {
       this.#isLoaded = false;
       console.log("pr state", this.#pr);
