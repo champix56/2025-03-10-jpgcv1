@@ -30,7 +30,7 @@ class Editor {
    * initialisation de la vues, des events, du meme en cours
    * @param {HTMLElement} domNode
    */
-  initEditor=(domNode, params)=> {
+  initEditor=async(domNode, params)=> {
     //console.log(arguments);
     this.#params = params;
     if (!domNode) {
@@ -38,9 +38,9 @@ class Editor {
     }
     this.#domNode = domNode;
     this.#imageNode = domNode.querySelector("image");
-    this.#fillSelect().then(()=>{
+    await this.#fillSelect()//.then(()=>{
       this.#fillData();
-    });
+    //});
     this.#fillFormEvent();
     this.#updateSvg();
   }
