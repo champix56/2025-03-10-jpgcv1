@@ -1,0 +1,1 @@
+const REST_BASE_URL='http://localhost:5679';
